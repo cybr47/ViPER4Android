@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
@@ -131,6 +132,7 @@ private val SeekbarTickRadius = 1.5.dp
  * One UI style seekbar: 3dp track, hollow ring thumb in the accent colour.
  * Ticks are drawn only for small, discrete step counts (1..9), like the previous Slider usage.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OneUiSlider(
     value: Float,
