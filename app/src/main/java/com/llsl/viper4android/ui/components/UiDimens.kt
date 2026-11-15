@@ -26,7 +26,9 @@ object UiDimens {
     val ListRowHeight = 52.dp
     val ValueColumnWidth = 56.dp
     val FabListPadding = 88.dp
-    val DialogCornerRadius = 28.dp
+    val DialogCornerRadius = 26.dp
+    val OneUiCardRadius = 26.dp
+    val OneUiControlRadius = 18.dp
     val DialogListMaxHeight = 300.dp
     val EqGraphHeight = 180.dp
     val EqEditGraphHeight = 160.dp

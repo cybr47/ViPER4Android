@@ -2,13 +2,19 @@ package com.llsl.viper4android.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 private val LightColorScheme =
     lightColorScheme(
@@ -36,6 +42,11 @@ private val LightColorScheme =
         onSurfaceVariant = md_theme_light_onSurfaceVariant,
         outline = md_theme_light_outline,
         outlineVariant = md_theme_light_outlineVariant,
+        surfaceContainerLowest = md_theme_light_surfaceContainerLowest,
+        surfaceContainerLow = md_theme_light_surfaceContainerLow,
+        surfaceContainer = md_theme_light_surfaceContainer,
+        surfaceContainerHigh = md_theme_light_surfaceContainerHigh,
+        surfaceContainerHighest = md_theme_light_surfaceContainerHighest,
     )
 
 private val DarkColorScheme =
@@ -64,12 +75,48 @@ private val DarkColorScheme =
         onSurfaceVariant = md_theme_dark_onSurfaceVariant,
         outline = md_theme_dark_outline,
         outlineVariant = md_theme_dark_outlineVariant,
+        surfaceContainerLowest = md_theme_dark_surfaceContainerLowest,
+        surfaceContainerLow = md_theme_dark_surfaceContainerLow,
+        surfaceContainer = md_theme_dark_surfaceContainer,
+        surfaceContainerHigh = md_theme_dark_surfaceContainerHigh,
+        surfaceContainerHighest = md_theme_dark_surfaceContainerHighest,
     )
+
+// sesl_rounded_corner_radius / sesl_dialog_background_corner_radius = 26dp,
+// sesl_button_corner_radius = 18dp.
+private val OneUiShapes =
+    Shapes(
+        extraSmall = RoundedCornerShape(8.dp),
+        small = RoundedCornerShape(12.dp),
+        medium = RoundedCornerShape(18.dp),
+        large = RoundedCornerShape(26.dp),
+        extraLarge = RoundedCornerShape(26.dp),
+    )
+
+// One UI Sans is not available to third-party apps, so this matches its sizes and weights
+// (list title 17sp, summary 14sp, dialog button 17sp, extended app bar title 34sp) on the system font.
+private val OneUiTypography =
+    Typography().run {
+        copy(
+            headlineMedium = headlineMedium.copy(fontSize = 34.sp, lineHeight = 38.sp, fontWeight = FontWeight.Normal),
+            headlineSmall = headlineSmall.copy(fontSize = 24.sp, lineHeight = 30.sp, fontWeight = FontWeight.Medium),
+            titleLarge = titleLarge.copy(fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.Medium),
+            titleMedium = titleMedium.copy(fontSize = 19.sp, lineHeight = 25.sp, fontWeight = FontWeight.Medium),
+            titleSmall = titleSmall.copy(fontSize = 17.sp, lineHeight = 22.sp, fontWeight = FontWeight.Medium),
+            bodyLarge = bodyLarge.copy(fontSize = 17.sp, lineHeight = 23.sp),
+            bodyMedium = bodyMedium.copy(fontSize = 16.sp, lineHeight = 22.sp),
+            bodySmall = bodySmall.copy(fontSize = 14.sp, lineHeight = 19.sp),
+            labelLarge = labelLarge.copy(fontSize = 15.sp, lineHeight = 20.sp, fontWeight = FontWeight.Medium),
+            labelMedium = labelMedium.copy(fontSize = 13.sp, lineHeight = 17.sp, fontWeight = FontWeight.Medium),
+            labelSmall = labelSmall.copy(fontSize = 12.sp, lineHeight = 16.sp, fontWeight = FontWeight.Medium),
+        )
+    }
 
 @Composable
 fun ViperTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    // One UI uses its own fixed palette, so Material You wallpaper colours are off by default.
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colorScheme =
@@ -90,6 +137,8 @@ fun ViperTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        shapes = OneUiShapes,
+        typography = OneUiTypography,
         content = content,
     )
 }

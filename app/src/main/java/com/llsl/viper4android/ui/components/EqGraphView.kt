@@ -1,6 +1,5 @@
 package com.llsl.viper4android.ui.components
 
-import android.graphics.Color.argb
 import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.compose.foundation.Canvas
@@ -24,8 +23,6 @@ import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import com.llsl.viper4android.R
@@ -69,6 +67,9 @@ fun EqCurveGraph(
     val primary = MaterialTheme.colorScheme.primary
     val surfaceDark = MaterialTheme.colorScheme.surfaceContainerHighest
     val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val gridColor = onSurface.copy(alpha = 0.1f).toArgb()
+    val dbLabelColor = onSurface.copy(alpha = 0.5f).toArgb()
     val density = LocalDensity.current
 
     val graphModifier =
@@ -99,7 +100,7 @@ fun EqCurveGraph(
 
             val gridPaint =
                 Paint().apply {
-                    color = argb(25, 255, 255, 255)
+                    color = gridColor
                     strokeWidth = 1f
                     style = Paint.Style.STROKE
                 }
@@ -118,7 +119,7 @@ fun EqCurveGraph(
 
             val dbLabelPaint =
                 Paint().apply {
-                    color = argb(120, 255, 255, 255)
+                    color = dbLabelColor
                     textSize = with(density) { UiDimens.Medium.toPx() }
                     textAlign = Paint.Align.RIGHT
                     isAntiAlias = true
@@ -409,16 +410,11 @@ fun EqEditDialog(
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier.width(UiDimens.SwitchSlotHeight),
                                 )
-                                Slider(
+                                OneUiSlider(
                                     value = localBands[index],
                                     onValueChange = { applyBandChange(it) },
                                     valueRange = DB_MIN..DB_MAX,
                                     modifier = Modifier.weight(1f),
-                                    colors =
-                                        SliderDefaults.colors(
-                                            activeTickColor = Color.Transparent,
-                                            inactiveTickColor = Color.Transparent,
-                                        ),
                                 )
                                 Spacer(modifier = Modifier.width(UiDimens.Large))
                                 Text(

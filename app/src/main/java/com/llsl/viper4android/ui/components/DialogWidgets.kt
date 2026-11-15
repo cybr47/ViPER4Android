@@ -24,7 +24,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 
-private val DialogCardCornerRadius = UiDimens.Standard
+private val DialogCardCornerRadius = UiDimens.OneUiControlRadius
 private val DialogButtonSpacing = UiDimens.Medium
 private val DialogDividerPadding = UiDimens.Standard
 private val DialogEmptyVerticalPadding = UiDimens.IconLarge
@@ -197,7 +196,7 @@ fun ToggleRow(
             }
         }
         Spacer(modifier = Modifier.width(DialogRowValueSpacing))
-        Switch(checked = checked, onCheckedChange = onCheckedChange)
+        OneUiSwitch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }
 

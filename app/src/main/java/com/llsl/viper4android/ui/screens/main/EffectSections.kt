@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
@@ -52,7 +53,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -91,6 +91,7 @@ import com.llsl.viper4android.ui.components.InputDialog
 import com.llsl.viper4android.ui.components.LabeledDropdown
 import com.llsl.viper4android.ui.components.LabeledSlider
 import com.llsl.viper4android.ui.components.LabeledSwitch
+import com.llsl.viper4android.ui.components.OneUiSwitch
 import com.llsl.viper4android.ui.components.RichText
 import com.llsl.viper4android.ui.components.SliderEdit
 import com.llsl.viper4android.ui.components.UiDimens
@@ -146,6 +147,7 @@ fun EffectSection(
                     horizontal = EffectCardHorizontalPadding,
                     vertical = EffectCardVerticalPadding,
                 ),
+        shape = RoundedCornerShape(UiDimens.OneUiCardRadius),
         colors =
             CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -197,7 +199,7 @@ fun EffectSection(
                     modifier = Modifier.weight(1f),
                 )
                 if (hasEnableSwitch) {
-                    Switch(
+                    OneUiSwitch(
                         checked = enabled,
                         onCheckedChange = onEnabledChange,
                     )
